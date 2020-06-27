@@ -1,4 +1,7 @@
 from docx import Document
+from datetime import date
+
+today = date.today()
 
 document = Document('cover_letter_template.docx')
 
@@ -19,6 +22,8 @@ for paragraph in document.paragraphs:
     	paragraph.text = paragraph.text.replace("[POSITION NAME]",position_name)
     if '[POSITION POSTING LOCATION]' in paragraph.text:
     	paragraph.text = paragraph.text.replace("[POSITION POSTING LOCATION]",position_posting_location)
+    if '[TODAYS DATE]' in paragraph.text:
+        paragraph.text = {today.strftime("%B %d, %Y")}
     if '<body' in paragraph.text:
     	if '<body '+body_number in paragraph.text:
     		keep_mode = True
